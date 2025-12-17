@@ -1,40 +1,20 @@
 #ifndef ERROR_H
 #define ERROR_H
 
-#include <stdlib.h>
+#include <stdint.h>
+#include <stddef.h>
 
-void flip_bit(uint8_t *buf, size_t pos)
-{
-    buf[pos/8] ^= (1 << (pos % 8));
-}
+/*
+ Error injection API for packed Manchester stream.
 
-void inject_single(uint8_t *buf, size_t bits)
-{
-    flip_bit(buf, rand() % bits);
-}
+ The 'bits' parameter is the total number of encoded bits (enc_len * 8).
+ Functions flip bits and optionally write flipped bit indices into out_positions (0-based).
+ Return value: number of bits flipped (also number of entries written to out_positions up to out_max).
+*/
 
-void inject_two(uint8_t *buf, size_t bits)
-{
-    size_t b1 = rand() % bits;
-    size_t b2 = rand() % bits;
-    while (b1 == b2)
-        b2 = rand() % bits;
-
-    flip_bit(buf, b1);
-    flip_bit(buf, b2);
-}
-
-void inject_odd(uint8_t *buf, size_t bits, int n)
-{
-    for (int i = 0; i < n; i++)
-        flip_bit(buf, rand() % bits);
-}
-
-void inject_burst(uint8_t *buf, size_t bits, int size)
-{
-    size_t start = rand() % (bits - size);
-    for (int i = 0; i < size; i++)
-        flip_bit(buf, start + i);
-}
+size_t inject_single(uint8_t *buf, size_t bits, size_t *out_positions, size_t out_max);
+size_t inject_two(uint8_t *buf, size_t bits, size_t *out_positions, size_t out_max);
+size_t inject_odd(uint8_t *buf, size_t bits, int n, size_t *out_positions, size_t out_max);
+size_t inject_burst(uint8_t *buf, size_t bits, int size, size_t *out_positions, size_t out_max);
 
 #endif
