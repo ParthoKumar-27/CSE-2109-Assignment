@@ -132,7 +132,6 @@ where N = encoded_bytes_sent. This length-prefix prevents issues caused by TCP s
   - original_byte_index = original_bit_index / 8  
   - original_bit_in_byte (MSB-first) = 7 - (original_bit_index % 8)
 
-If you prefer, the code can be modified to print positions as `byte.bit` (human-friendly) or use 1-based numbering.
 
 ---
 
