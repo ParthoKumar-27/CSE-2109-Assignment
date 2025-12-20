@@ -40,7 +40,7 @@ This is intended as an educational assignment to illustrate CRC, encoding, frami
 - `Makefile` — Build helpers and foreground run targets (`make server` / `make client`).  
 - `README.md` — This file.
 
-> Note: Implementations are split into `.c` files (non-inline) to avoid duplicate symbol/linker problems and to keep the build simple.
+
 
 ---
 
@@ -74,6 +74,9 @@ gcc Sender.c crc16.c manchester.c error.c -o sender
 gcc Receiver.c crc16.c manchester.c error.c -o receiver
 ```
 Then run ./sender and ./receiver in two different terminals.
+
+
+
 ---
 
 ## 5. How to run (two separate terminals)
