@@ -64,7 +64,16 @@ Clean build artifacts:
 ```bash
 make clean
 ```
-
+Manual Compilation
+- Compile sender
+```bash
+gcc Sender.c crc16.c manchester.c error.c -o sender
+```
+- Compile Receiver
+```bash
+gcc Receiver.c crc16.c manchester.c error.c -o receiver
+```
+Then run ./sender and ./receiver in two different terminals.
 ---
 
 ## 5. How to run (two separate terminals)
